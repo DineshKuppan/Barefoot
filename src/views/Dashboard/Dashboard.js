@@ -20,8 +20,6 @@ import {
   Row,
   Table,
 } from 'reactstrap';
-import Widget03 from '../../views/Widgets/Widget03'
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
 const brandPrimary = getStyle('--primary')
@@ -45,8 +43,7 @@ const cardChartData1 = {
 
 const cardChartOpts1 = {
   tooltips: {
-    enabled: false,
-    custom: CustomTooltips
+    enabled: false
   },
   maintainAspectRatio: false,
   legend: {
@@ -103,8 +100,7 @@ const cardChartData2 = {
 
 const cardChartOpts2 = {
   tooltips: {
-    enabled: false,
-    custom: CustomTooltips
+    enabled: false
   },
   maintainAspectRatio: false,
   legend: {
@@ -161,8 +157,7 @@ const cardChartData3 = {
 
 const cardChartOpts3 = {
   tooltips: {
-    enabled: false,
-    custom: CustomTooltips
+    enabled: false
   },
   maintainAspectRatio: false,
   legend: {
@@ -205,8 +200,7 @@ const cardChartData4 = {
 
 const cardChartOpts4 = {
   tooltips: {
-    enabled: false,
-    custom: CustomTooltips
+    enabled: false
   },
   maintainAspectRatio: false,
   legend: {
@@ -253,8 +247,7 @@ const makeSocialBoxData = (dataSetNo) => {
 
 const socialChartOpts = {
   tooltips: {
-    enabled: false,
-    custom: CustomTooltips
+    enabled: false
   },
   responsive: true,
   maintainAspectRatio: false,
@@ -328,7 +321,6 @@ const makeSparkLineData = (dataSetNo, variant) => {
 const sparklineChartOpts = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
   },
   responsive: true,
   maintainAspectRatio: true,
@@ -410,7 +402,6 @@ const mainChart = {
 const mainChartOpts = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips,
     intersect: true,
     mode: 'index',
     position: 'nearest',
@@ -636,13 +627,6 @@ class Dashboard extends Component {
         </Row>
 
         <Row>
-          <Col xs="6" sm="6" lg="3">
-            <Widget03 dataBox={() => ({ variant: 'facebook', friends: '89k', feeds: '459' })} >
-              <div className="chart-wrapper">
-                <Line data={makeSocialBoxData(0)} options={socialChartOpts} height={90} />
-              </div>
-            </Widget03>
-          </Col>
 
           <Col xs="6" sm="6" lg="3">
             <div className="brand-card">
