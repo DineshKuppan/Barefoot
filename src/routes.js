@@ -7,6 +7,10 @@ function Loading() {
   return <div>Loading...</div>;
 }
 
+function LoadingFallBack() {
+  return <div>Content displayed when no content fetch from database - Fallback ...</div>;
+}
+
 const Forms = Loadable({
   loader: () => import('./views/Base/Forms'),
   loading: Loading,
@@ -15,6 +19,11 @@ const Forms = Loadable({
 const Tables = Loadable({
   loader: () => import('./views/Base/Tables'),
   loading: Loading,
+});
+
+const AccessServer = Loadable({
+  loader: () => import('./views/Base/Tables/accessserver'),
+  loading: LoadingFallBack,
 });
 
 const Charts = Loadable({
@@ -32,6 +41,11 @@ const Users = Loadable({
   loading: Loading,
 });
 
+const Results = Loadable({
+  loader: () => import('./views/Results'),
+  loading: Loading,
+});
+
 const User = Loadable({
   loader: () => import('./views/Users/User'),
   loading: Loading,
@@ -42,10 +56,12 @@ const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/base/forms', name: 'Forms', component: Forms },
-  { path: '/base/tables', name: 'Tables', component: Tables },
+  { path: '/base/tables', name: 'Results', component: Tables },
   { path: '/charts', name: 'Charts', component: Charts },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  { path: '/accessserver', exact: true, name: 'Get Results', component: AccessServer },
+  { path: '/results', exact: true, name: 'Get Results', component: Results }
 ];
 
 export default routes;

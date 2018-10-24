@@ -14,7 +14,7 @@ export default class Users extends Component {
       method: 'GET'
     }).then(function(response) {
       if (response.status >= 400) {
-        throw new Error("Bad response from server");
+        throw new Error("Bad response from services");
       }
       return response.json();
     }).then(function(data) {

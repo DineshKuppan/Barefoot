@@ -212,7 +212,7 @@ In most cases bumping the `react-scripts` version in `package.json` and running 
 - moved from deprecated CardBlock to `CardBody` reactstrap component
 - moved to `NavDropdown` in `Header` component
 - fix for app-header navbar-nav dropdown-menu-right
-- fix typo in Tables component PaginationItem
+- fix typo in Results component PaginationItem
 
 ###### `v1.0.0`
 - Sidebar component:

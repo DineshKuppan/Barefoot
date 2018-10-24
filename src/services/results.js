@@ -2,7 +2,7 @@
 
 let db = require('./pghelper');
 
-let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+//let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
 let findAll = (req, res, next) => {
 

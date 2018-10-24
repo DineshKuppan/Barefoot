@@ -19,6 +19,11 @@ export default {
       name: 'Charts',
       url: '/charts',
       icon: 'icon-pie-chart',
+    },
+    {
+      name: 'SearchResults',
+      url: '/results',
+      icon: 'icon-star',
     }
   ],
 };
