@@ -1,11 +1,19 @@
 /* eslint-disable */
-import React from 'react';
+import React from "react";
 
 class SearchResultListItem extends React.Component {
-
-    render() {
-        return ("<tr> <td>1</td><td>dinesh</td><td>one</td><td>two</td></tr>");
-    }
-};
+  render() {
+    console.log((this.props.result))
+    console.log('Trying to find the solution !!!');
+    return (
+      <tr key={this.props.result.id}>
+        <td>{this.props.result.name}</td>
+        <td>{this.props.result.brewery}</td>
+        <td>{this.props.result.alcohol}</td>
+        <td>{this.props.result.image}</td>
+      </tr>
+    );
+  }
+}
 
 export default SearchResultListItem;

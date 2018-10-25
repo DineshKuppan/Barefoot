@@ -6,11 +6,13 @@ let findAll = cb => {
   console.log("Accessing the Results page");
   console.log("Requests");
   var values = [];
-  let sql = "SELECT * from beer";
-  dbCallAction(sql, cb);
+  let sql = "SELECT * from beer where id>250 and id<255";
+  dbCallAction(sql);
 };
 
-function dbCallAction(sql, cb) {
+console.log(findAll())
+
+function dbCallAction(sql) {
   var conString = "postgres://postgres:admin@localhost/belgianbeers";
 
   var client = new pg.Client(conString);
@@ -23,7 +25,6 @@ function dbCallAction(sql, cb) {
         return console.error("error running query", err);
       }
       console.log(result);
-      cb(err, result);
       //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
       client.end();
     });

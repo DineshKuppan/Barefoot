@@ -2,7 +2,6 @@
 import React, {Component} from 'react';
 import SearchResultList from './app/components/SearchResultList';
 //import * as dbIntegration from './../../../services/dbIntegration';
-
 import axios from 'axios';
 
 import {Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table} from 'reactstrap';
@@ -24,12 +23,44 @@ class Results extends Component {
       loading: true,
       error: null
     };
+  };
+
+  findBusinessProducts() {
+    console.info("Trying to fetch results from database");
+    let findBusinessRules = cb => {
+      console.log("Accessing the Results page");
+      console.log("Requests");
+      var values = [];
+      let sql = "SELECT * from beer";
+      var conString = "postgres://postgres:admin@localhost/belgianbeers";
+      let pg = require('pg');
+      var client = new pg.Client(conString);
+      client.connect(function(err) {
+        if (err) {
+          return console.error("could not connect to postgres", err);
+        }
+        client.query(sql, function(err, result) {
+          if (err) {
+            return console.error("error running query", err);
+          }
+          console.log(result);
+          //cb(err, result);
+          //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
+          client.end();
+        });
+      }).then(res => {
+        console.log('Response Raw Data')
+        console.log(res);
+      });
+    };
+    console.log('Results Matching');
   }
 
   findDineshResults(){
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    axios.get('http://10.1.75.141:4000/accessdata')
       .then(res => {
-        const posts = Object.entries(res.data).map(obj => obj);
+        console.log(res.data.rows)
+        const posts = Object.values(res.data.rows).map(obj => obj);
         this.setState({
           posts: posts,
           loading: false,
@@ -47,6 +78,26 @@ class Results extends Component {
   componentDidMount() {
     this.findDineshResults();
     console.log('Inside Component Mount');
+  }
+
+  dbCallAction(sql, cb) {
+    var conString = "postgres://postgres:admin@localhost/belgianbeers";
+    let pg = pg;
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+      if (err) {
+        return console.error("could not connect to postgres", err);
+      }
+      client.query(sql, function(err, result) {
+        if (err) {
+          return console.error("error running query", err);
+        }
+        console.log(result);
+        cb(err, result);
+        //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
+        client.end();
+      });
+    });
   }
 
   findProducts(){
@@ -81,10 +132,10 @@ class Results extends Component {
                 <Table responsive bordered>
                   <thead>
                   <tr>
-                    <th>Username</th>
-                    <th>Date registered</th>
-                    <th>Role</th>
-                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Brewery</th>
+                    <th>Alcohol (%)</th>
+                    <th>Image</th>
                   </tr>
                   </thead>
                   <SearchResultList results={this.state.posts} test="Dinesh"/>

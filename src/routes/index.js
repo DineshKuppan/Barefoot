@@ -1,22 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var findAll = require("./../services/dbIntegration").findAll;
+const fs = require('fs');
+const path = require('path');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-router.get('/results', function(req, res, next) {
-  var response = findAll(function(err,dbResponse){
-    if(err){
-      res.json({error:err});
-    }
-    else{
-      console.log(dbResponse);
-      res.send(dbResponse)
-    }
+module.exports = (app) => {
+  // API routes
+  fs.readdirSync(__dirname + '/api/').forEach((file) => {
+    require(`./api/${file.substr(0, file.indexOf('.'))}`)(app);
   });
-});
-
-module.exports = router;
+};
